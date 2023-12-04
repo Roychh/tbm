@@ -1,8 +1,11 @@
 {
   "name": "tbm",
   "version": "1.0.0",
-  "description": "",
+  "description": "tbm",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Roychh/tbm.git"},
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon inxex.js"

@@ -1,3 +1,4 @@
+process.setMaxListeners(15);
 const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')

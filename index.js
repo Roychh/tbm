@@ -46,21 +46,23 @@ bot.command('hot_drinks', async (ctx)=> {
 
  bot.command('showcase', async (ctx) => {
      try {
-         await ctx.replyWithHTML('<b>Витрина</b>', Markup.inlineKeyboard(
-             [
-                 [Markup.button.callback('Тарт Лимонный', 'btn_43'), Markup.button.callback('Анна Павлова', 'btn_44'), Markup.button.callback('Фундучное', 'btn_45'), Markup.button.callback('Тарт Лесные ягоды', 'btn_46')],
-                 [Markup.button.callback('Сникерс', 'btn_47'), Markup.button.callback('Тирамису', 'btn_48'), Markup.button.callback('Медовик', 'btn_49'), Markup.button.callback('Панна Котта', 'btn_50')],
-                 [Markup.button.callback('Манго/маракуйя', 'btn_51'), Markup.button.callback('Карамельно-ореховый', 'btn_52'), Markup.button.callback('Моти', 'btn_53'), Markup.button.callback('Макаронсы', 'btn_54')],
-                 [Markup.button.callback('Чиз Классика', 'btn_55'), Markup.button.callback('Чиз Карамель', 'btn_56'), Markup.button.callback('Чиз Черничный', 'btn_57'), Markup.button.callback('Ягодная мерри', 'btn_58')],
-                 [Markup.button.callback('Наполеон класс', 'btn_59'), Markup.button.callback('Наполеон шок', 'btn_60'), Markup.button.callback('Фисташковый', 'btn_61'), Markup.button.callback('Творожный', 'btn_62')],
-                 [Markup.button.callback('Картошка', 'btn_63'), Markup.button.callback('Лесная сказка', 'btn_64'), Markup.button.callback('Пряник', 'btn_65'), Markup.button.callback('Шок-мятное', 'btn_66')],
-                 [Markup.button.callback('Миндальное', 'btn_67'), Markup.button.callback('Овсяное', 'btn_68'), Markup.button.callback('Тройной шок', 'btn_69'), Markup.button.callback('Эклеры', 'btn_70')],
-                 [Markup.button.callback('Таллер', 'btn_71'), Markup.button.callback('Шок-арахис', 'btn_72'), Markup.button.callback('Миндальный чипс', 'btn_73'), Markup.button.callback('Сендвичи', 'btn_74')],
-                 [Markup.button.callback('Блины', 'btn_75'), Markup.button.callback('Сырники', 'btn_76'), Markup.button.callback('Кубете', 'btn_77'), Markup.button.callback('Шпинатный', 'btn_78')],
-                 [Markup.button.callback('Курица/грибы', 'btn_79'), Markup.button.callback('Салат Греческий', 'btn_80'), Markup.button.callback('Салат Цезарь', 'btn_81'), Markup.button.callback('Круассаны', 'btn_82')],
-                 [Markup.button.callback('Роллы', 'btn_83')],
-             ]
-         ).extra());
+         await ctx.replyWithHTML('<b>Витрина</b>', {
+             reply_markup: {
+                 inline_keyboard: [
+                     [{ text: 'Тарт Лимонный', callback_data: 'btn_43' }, { text: 'Анна Павлова', callback_data: 'btn_44' }, { text: 'Фундучное', callback_data: 'btn_45' }, { text: 'Тарт Лесные ягоды', callback_data: 'btn_46' }],
+                     [{ text: 'Сникерс', callback_data: 'btn_47' }, { text: 'Тирамису', callback_data: 'btn_48' }, { text: 'Медовик', callback_data: 'btn_49' }, { text: 'Панна Котта', callback_data: 'btn_50' }],
+                     [{ text: 'Манго/маракуйя', callback_data: 'btn_51' }, { text: 'Карамельно-ореховый', callback_data: 'btn_52' }, { text: 'Моти', callback_data: 'btn_53' }, { text: 'Макаронсы', callback_data: 'btn_54' }],
+                     [{ text: 'Чиз Классика', callback_data: 'btn_55' }, { text: 'Чиз Карамель', callback_data: 'btn_56' }, { text: 'Чиз Черничный', callback_data: 'btn_57' }, { text: 'Ягодная мерри', callback_data: 'btn_58' }],
+                     [{ text: 'Наполеон класс', callback_data: 'btn_59' }, { text: 'Наполеон шок', callback_data: 'btn_60' }, { text: 'Фисташковый', callback_data: 'btn_61' }, { text: 'Творожный', callback_data: 'btn_62' }],
+                     [{ text: 'Картошка', callback_data: 'btn_63' }, { text: 'Лесная сказка', callback_data: 'btn_64' }, { text: 'Пряник', callback_data: 'btn_65' }, { text: 'Шок-мятное', callback_data: 'btn_66' }],
+                     [{ text: 'Миндальное', callback_data: 'btn_67' }, { text: 'Овсяное', callback_data: 'btn_68' }, { text: 'Тройной шок', callback_data: 'btn_69' }, { text: 'Эклеры', callback_data: 'btn_70' }],
+                     [{ text: 'Таллер', callback_data: 'btn_71' }, { text: 'Шок-арахис', callback_data: 'btn_72' }, { text: 'Миндальный чипс', callback_data: 'btn_73' }, { text: 'Сендвичи', callback_data: 'btn_74' }],
+                     [{ text: 'Блины', callback_data: 'btn_75' }, { text: 'Сырники', callback_data: 'btn_76' }, { text: 'Кубете', callback_data: 'btn_77' }, { text: 'Шпинатный', callback_data: 'btn_78' }],
+                     [{ text: 'Курица/грибы', callback_data: 'btn_79' }, { text: 'Салат Греческий', callback_data: 'btn_80' }, { text: 'Салат Цезарь', callback_data: 'btn_81' }, { text: 'Круассаны', callback_data: 'btn_82' }],
+                     [{ text: 'Роллы', callback_data: 'btn_83' }],
+                 ]
+             }
+         });
      } catch (e) {
          console.error(e);
      }

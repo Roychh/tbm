@@ -67,7 +67,7 @@ bot.command('hot_drinks', async (ctx)=> {
          console.error(e);
      }
  });
- 
+
  bot.command('work', async (ctx) => {
      try {
             
@@ -87,7 +87,7 @@ bot.command('hot_drinks', async (ctx)=> {
          'книги',
          'амхара',
          'гуджи',
-         'колумбия',
+         'колумб',
          'иргачиф',
          'габелла',
          'помогите',
@@ -141,7 +141,7 @@ bot.on('text', (ctx) => {
           `;
         ctx.replyWithHTML(formattedText);
       }
-      else if (messageText.includes('[колумбия')) {
+      else if (messageText.includes('[колумб')) {
           const formattedText = `<b>Дескрипторы</b>: 
           <i>вишня, красный апельсин, молочный шоколад</i>;
           <b>Закладка кофе</b>: <i>17,6...18 грамм</i>;

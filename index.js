@@ -44,27 +44,27 @@ bot.command('hot_drinks', async (ctx)=> {
       }
  })
 
- bot.command('showcase', async (ctx)=> {
+ bot.command('showcase', async (ctx) => {
      try {
-      await ctx.replyWithHTML('<b>Витрина</b>', Markup.inlineKeyboard(
-           [
-                [Markup.button.callback('Тарт Лимонный','btn_43'), Markup.button.callback('Анна Павлова','btn_44'), Markup.button.callback('Фундучное','btn_45'), Markup.button.callback('Тарт Лесные ягоды','btn_46')],
-                [Markup.button.callback('Сникерс','btn_47'), Markup.button.callback('Тирамису','btn_48'), Markup.button.callback('Медовик','btn_49'), Markup.button.callback('Панна Котта','btn_50')],
-                [Markup.button.callback('Манго/маракуйя','btn_51'), Markup.button.callback('Карамельно-ореховый','btn_52'), Markup.button.callback('Моти','btn_53'), Markup.button.callback('Макаронсы','btn_54')],
-                [Markup.button.callback('Чиз Классика','btn_55'), Markup.button.callback('Чиз Карамель','btn_56'), Markup.button.callback('Чиз Черничный','btn_57'), Markup.button.callback('Ягодная мерри','btn_58')],
-                [Markup.button.callback('Наполеон класс','btn_59'), Markup.button.callback('Наполеон шок','btn_60'), Markup.button.callback('Фисташковый','btn_61'), Markup.button.callback('Творожный','btn_62')],
-                [Markup.button.callback('Картошка','btn_63'), Markup.button.callback('Лесная сказка','btn_64'), Markup.button.callback('Пряник','btn_65'), Markup.button.callback('Шок-мятное','btn_66')],
-                [Markup.button.callback('Миндальное','btn_67'), Markup.button.callback('Овсяное','btn_68'), Markup.button.callback('Тройной шок','btn_69'), Markup.button.callback('Эклеры','btn_70')],
-                [Markup.button.callback('Таллер','btn_71'), Markup.button.callback('Шок-арахис','btn_72'), Markup.button.callback('Миндальный чипс','btn_73'), Markup.button.callback('Сендвичи','btn_74')],
-                [Markup.button.callback('Блины','btn_75'), Markup.button.callback('Сырники','btn_76'), Markup.button.callback('Кубете','btn_77'), Markup.button.callback('Шпинатный','btn_78')],
-                [Markup.button.callback('Курица/грибы','btn_79'), Markup.button.callback('Салат Греческий','btn_80'), Markup.button.callback('Салат Цезарь','btn_81'), Markup.button.callback('Круассаны','btn_82')],
-                [Markup.button.callback('Роллы','btn_83')],
-           ]
-      ))
-      } catch (e) {
-           console.error(e)
-      }
- })
+         await ctx.replyWithHTML('<b>Витрина</b>', Markup.inlineKeyboard(
+             [
+                 [Markup.button('Тарт Лимонный', 'btn_43'), Markup.button('Анна Павлова', 'btn_44'), Markup.button('Фундучное', 'btn_45'), Markup.button('Тарт Лесные ягоды', 'btn_46')],
+                 [Markup.button('Сникерс', 'btn_47'), Markup.button('Тирамису', 'btn_48'), Markup.button('Медовик', 'btn_49'), Markup.button('Панна Котта', 'btn_50')],
+                 [Markup.button('Манго/маракуйя', 'btn_51'), Markup.button('Карамельно-ореховый', 'btn_52'), Markup.button('Моти', 'btn_53'), Markup.button('Макаронсы', 'btn_54')],
+                 [Markup.button('Чиз Классика', 'btn_55'), Markup.button('Чиз Карамель', 'btn_56'), Markup.button('Чиз Черничный', 'btn_57'), Markup.button('Ягодная мерри', 'btn_58')],
+                 [Markup.button('Наполеон класс', 'btn_59'), Markup.button('Наполеон шок', 'btn_60'), Markup.button('Фисташковый', 'btn_61'), Markup.button('Творожный', 'btn_62')],
+                 [Markup.button('Картошка', 'btn_63'), Markup.button('Лесная сказка', 'btn_64'), Markup.button('Пряник', 'btn_65'), Markup.button('Шок-мятное', 'btn_66')],
+                 [Markup.button('Миндальное', 'btn_67'), Markup.button('Овсяное', 'btn_68'), Markup.button('Тройной шок', 'btn_69'), Markup.button('Эклеры', 'btn_70')],
+                 [Markup.button('Таллер', 'btn_71'), Markup.button('Шок-арахис', 'btn_72'), Markup.button('Миндальный чипс', 'btn_73'), Markup.button('Сендвичи', 'btn_74')],
+                 [Markup.button('Блины', 'btn_75'), Markup.button('Сырники', 'btn_76'), Markup.button('Кубете', 'btn_77'), Markup.button('Шпинатный', 'btn_78')],
+                 [Markup.button('Курица/грибы', 'btn_79'), Markup.button('Салат Греческий', 'btn_80'), Markup.button('Салат Цезарь', 'btn_81'), Markup.button('Круассаны', 'btn_82')],
+                 [Markup.button('Роллы', 'btn_83')],
+             ]
+         ));
+     } catch (e) {
+         console.error(e);
+     }
+ });
 
  bot.command('work', async (ctx) => {
      try {

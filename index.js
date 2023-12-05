@@ -7,23 +7,52 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => ctx.reply('Приветствую!'))
 bot.help((ctx) => ctx.reply('Помощь'))
 
-bot.command('hot_drinks', async (ctx)=> {
-    try {
-     await ctx.replyWithHTML('<b>ГОРЯЧИЕ НАПИТКИ</b>', Markup.inlineKeyboard(
-          [
-               [Markup.button.callback('Эспрессо','btn_1'), Markup.button.callback('Американо','btn_2'), Markup.button.callback('Латте','btn_3')],
-               [Markup.button.callback('Карамельный Маккиато','btn_4'), Markup.button.callback('Капучино','btn_5'), Markup.button.callback('FlatWhite','btn_6')],
-              [Markup.button.callback('РАФ','btn_7'), Markup.button.callback('Кедровый капучино','btn_8'), Markup.button.callback('МАТЧА','btn_9')],
-              [Markup.button.callback('Гляссе','btn_10'), Markup.button.callback('Чай с молоком','btn_11'), Markup.button.callback('ЧАй Лесная ягода','btn_12')],
-              [Markup.button.callback('Какао/Горячий шоколад','btn_13'), Markup.button.callback('Какао на растительном','btn_14'), Markup.button.callback('ЧАй Малина','btn_15')],
-              [Markup.button.callback('Чай Имбирный','btn_16'), Markup.button.callback('Чай Цитрусовый','btn_17'), Markup.button.callback('ЧАй МАНГО/Лайм','btn_18')],
-              [Markup.button.callback('Чай Облепиха с имбирём','btn_19'), Markup.button.callback('Глинтвейн вишня','btn_20')],
-          ]
-     ))
+bot.command('hot_drinks', async (ctx) => {
+     try {
+         await ctx.replyWithHTML('<b>ГОРЯЧИЕ НАПИТКИ</b>', {
+             reply_markup: {
+                 inline_keyboard: [
+                     [
+                         { text: 'Эспрессо', callback_data: 'btn_1' },
+                         { text: 'Американо', callback_data: 'btn_2' },
+                         { text: 'Латте', callback_data: 'btn_3' },
+                     ],
+                     [
+                         { text: 'Карамельный Маккиато', callback_data: 'btn_4' },
+                         { text: 'Капучино', callback_data: 'btn_5' },
+                         { text: 'FlatWhite', callback_data: 'btn_6' },
+                     ],
+                     [
+                         { text: 'РАФ', callback_data: 'btn_7' },
+                         { text: 'Кедровый капучино', callback_data: 'btn_8' },
+                         { text: 'МАТЧА', callback_data: 'btn_9' },
+                     ],
+                     [
+                         { text: 'Гляссе', callback_data: 'btn_10' },
+                         { text: 'Чай с молоком', callback_data: 'btn_11' },
+                         { text: 'ЧАй Лесная ягода', callback_data: 'btn_12' },
+                     ],
+                     [
+                         { text: 'Какао/Горячий шоколад', callback_data: 'btn_13' },
+                         { text: 'Какао на растительном', callback_data: 'btn_14' },
+                         { text: 'ЧАй Малина', callback_data: 'btn_15' },
+                     ],
+                     [
+                         { text: 'Чай Имбирный', callback_data: 'btn_16' },
+                         { text: 'Чай Цитрусовый', callback_data: 'btn_17' },
+                         { text: 'ЧАй МАНГО/Лайм', callback_data: 'btn_18' },
+                     ],
+                     [
+                         { text: 'Чай Облепиха с имбирём', callback_data: 'btn_19' },
+                         { text: 'Глинтвейн вишня', callback_data: 'btn_20' },
+                     ],
+                 ],
+             },
+         });
      } catch (e) {
-          console.error(e)
+         console.error(e);
      }
-})
+ });
 
 bot.command('cold_drinks', async (ctx) => {
      try {
@@ -172,7 +201,7 @@ bot.on('text', (ctx) => {
           `;
         ctx.replyWithHTML(formattedText);
       }
-      else if (messageText.includes('[колумб')) {
+      else if (messageText.includes('колумб')) {
           const formattedText = `<b>Дескрипторы</b>: 
           <i>вишня, красный апельсин, молочный шоколад</i>;
           <b>Закладка кофе</b>: <i>17,6...18 грамм</i>;

@@ -2,7 +2,7 @@ process.setMaxListeners(20);
 const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
-const allowedUserIds = [482220254];
+const allowedUserIds = ['482220254'];
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 

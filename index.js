@@ -2,25 +2,15 @@ process.setMaxListeners(20);
 const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
 
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
-});
-
-const allowedPhoneNumbers = ['+7978704980']; // Замените на реальные номера телефонов
+const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
 const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
 bot.help((ctx) => ctx.reply('text.commands'))
-bot.use((ctx, next) => { console.log('Update:', ctx.update);
+bot.use((ctx, next) => {
+console.log('Update:', ctx.update);
     return next();
 });
-bot.start((ctx) => ctx.reply('Приветствую!'));
-// Другие обработчики и команды...
-
-// Запуск бота
-bot.launch();
 
 bot.command('start', async (ctx) => {
     console.log('Handling /start command');

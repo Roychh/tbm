@@ -1,15 +1,3 @@
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
-
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
-});
-
-bot.use((ctx, next) => {
-    console.log('Update:', ctx.update);
-    return next();
-});
 process.setMaxListeners(20);
 const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()

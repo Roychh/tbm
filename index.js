@@ -7,6 +7,21 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => ctx.reply('Приветствую!'))
 bot.help((ctx) => ctx.reply('text.commands'))
 
+const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
+
+bot.command('start', async (ctx) => {
+    const userId = ctx.from.id;
+
+    // Получение информации о пользователе, включая номер телефона
+    const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
+
+    if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
+        ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
+    } else {
+        ctx.reply('Извините, у вас нет доступа к этому боту.');
+    }
+});
+
 bot.command('hot_drinks', async (ctx) => {
      try {
          await ctx.replyWithHTML('<b>ГОРЯЧИЕ НАПИТКИ</b>', {
@@ -147,7 +162,7 @@ bot.command('cold_drinks', async (ctx) => {
          'книги',
          'амхара',
          'гуджи',
-         'колумб',
+         'колумбия',
          'иргачиф',
          'габелла',
          'помогите',
@@ -201,7 +216,7 @@ bot.on('text', (ctx) => {
           `;
         ctx.replyWithHTML(formattedText);
       }
-      else if (messageText.includes('колумб')) {
+      else if (messageText.includes('колумбия')) {
           const formattedText = `<b>Дескрипторы</b>: 
           <i>вишня, красный апельсин, молочный шоколад</i>;
           <b>Закладка кофе</b>: <i>17,6...18 грамм</i>;

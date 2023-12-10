@@ -5,7 +5,7 @@ const text = require ('./const')
 const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
+
 bot.help((ctx) => ctx.reply('text.commands'))
 
 bot.command('start', async (ctx) => {

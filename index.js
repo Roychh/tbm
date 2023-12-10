@@ -1,11 +1,3 @@
-process.setMaxListeners(20);
-const { Telegraf, Markup } = require('telegraf');
-require('dotenv').config()
-const text = require ('./const')
-const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
-
-const bot = new Telegraf(process.env.BOT_TOKEN)
-
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
@@ -14,17 +6,35 @@ process.on('uncaughtException', (error) => {
     console.error('Uncaught Exception:', error);
 });
 
-// Обработчик команды /start
+bot.use((ctx, next) => {
+    console.log('Update:', ctx.update);
+    return next();
+});
+process.setMaxListeners(20);
+const { Telegraf, Markup } = require('telegraf');
+require('dotenv').config()
+const text = require ('./const')
+
+const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
+const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
+bot.help((ctx) => ctx.reply('text.commands'))
+
 bot.command('start', async (ctx) => {
+    console.log('Handling /start command');
+
     try {
         const userId = ctx.from.id;
+        console.log('User ID:', userId);
 
-        // Получение информации о пользователе, включая номер телефона
         const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
+        console.log('User info:', user);
 
         if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
+            console.log('Access granted');
             ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
         } else {
+            console.log('Access denied');
             ctx.reply('Извините, у вас нет доступа к этому боту.');
         }
     } catch (error) {

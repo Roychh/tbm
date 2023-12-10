@@ -3,37 +3,34 @@ const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
 
-const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
-bot.help((ctx) => ctx.reply('text.commands'))
-bot.use((ctx, next) => {
-console.log('Update:', ctx.update);
-    return next();
-});
+const password = 'bimba'; // Замените на реальный пароль
+const allowedUserIds = [482220254]; // Замените на реальные ID пользователей
 
-bot.command('start', async (ctx) => {
-    console.log('Handling /start command');
+bot.start((ctx) => {
+    // Проверка наличия текста в сообщении пользователя
+    if (!ctx.message || !ctx.message.text) {
+        return ctx.reply('Пожалуйста, введите пароль.');
+    }
 
-    try {
-        const userId = ctx.from.id;
-        console.log('User ID:', userId);
+    // Получение введенного пользователем пароля
+    const userPassword = ctx.message.text.trim();
 
-        const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
-        console.log('User info:', user);
-
-        if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
-            console.log('Access granted');
-            ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
+    // Проверка пароля
+    if (userPassword === password) {
+        // Проверка ID пользователя
+        if (allowedUserIds.includes(ctx.from.id)) {
+            return ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
         } else {
-            console.log('Access denied');
-            ctx.reply('Извините, у вас нет доступа к этому боту.');
+            return ctx.reply('Извините, у вас нет доступа к этому боту.');
         }
-    } catch (error) {
-        console.error('Error in /start command:', error);
-        ctx.reply('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
+    } else {
+        return ctx.reply('Неверный пароль. Попробуйте еще раз.');
     }
 });
+
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
+bot.help((ctx) => ctx.reply('text.commands'))
 
 bot.command('hot_drinks', async (ctx) => {
      try {

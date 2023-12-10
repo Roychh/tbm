@@ -16,8 +16,6 @@ bot.start((ctx) => {
     }
 });
 
-// Добавьте обработчики для других команд и событий, если нужно
-
 bot.on('text', (ctx) => {
     const userId = ctx.from.id;
 
@@ -25,10 +23,8 @@ bot.on('text', (ctx) => {
         ctx.reply('Извините, у вас нет доступа к этому боту.');
         return;
     }
-
-    // Ваш код обработки текстовых сообщений
 });
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
+
 bot.help((ctx) => ctx.reply('text.commands'))
 
 bot.command('hot_drinks', async (ctx) => {

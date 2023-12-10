@@ -16,8 +16,10 @@ bot.command('start', async (ctx) => {
     const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
 
     if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
+        // Пользователь прошел проверку, приветствуем его
         ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
     } else {
+        // Пользователь не прошел проверку, сообщаем ему об отсутствии доступа
         ctx.reply('Извините, у вас нет доступа к этому боту.');
     }
 });

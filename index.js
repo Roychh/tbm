@@ -7,20 +7,31 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
 bot.help((ctx) => ctx.reply('text.commands'))
 
-const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
-
 bot.command('start', async (ctx) => {
     const userId = ctx.from.id;
 
-    // Получение информации о пользователе, включая номер телефона
-    const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
+    try {
+        // Получение информации о пользователе, включая номер телефона
+        const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
+        
+        if (user && user.user && user.user.username) {
+            // Проверяем наличие username (он уникален для каждого пользователя)
+            const username = user.user.username;
 
-    if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
-        // Пользователь прошел проверку, приветствуем его
-        ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
-    } else {
-        // Пользователь не прошел проверку, сообщаем ему об отсутствии доступа
-        ctx.reply('Извините, у вас нет доступа к этому боту.');
+            if (allowedUsernames.includes(username)) {
+                // Пользователь прошел проверку, приветствуем его
+                ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
+            } else {
+                // Пользователь не прошел проверку, сообщаем ему об отсутствии доступа
+                ctx.reply('Извините, у вас нет доступа к этому боту.');
+            }
+        } else {
+            // Пользователь не предоставил достаточно информации, чтобы его идентифицировать
+            ctx.reply('Извините, не удалось получить информацию о вас.');
+        }
+    } catch (error) {
+        console.error(error);
+        ctx.reply('Произошла ошибка при обработке вашего запроса.');
     }
 });
 
@@ -166,7 +177,7 @@ bot.command('cold_drinks', async (ctx) => {
          'гуджи',
          'колумбия',
          'иргачиф',
-         'габелла',
+         'как обычно',
          'помогите',
          'помол',
          // Добавьте другие ключевые слова по мере необходимости

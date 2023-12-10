@@ -12,11 +12,15 @@ process.on('uncaughtException', (error) => {
 
 const allowedPhoneNumbers = ['+7978704980']; // Замените на реальные номера телефонов
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
 bot.help((ctx) => ctx.reply('text.commands'))
 bot.use((ctx, next) => { console.log('Update:', ctx.update);
     return next();
 });
+bot.start((ctx) => ctx.reply('Приветствую!'));
+// Другие обработчики и команды...
+
+// Запуск бота
+bot.launch();
 
 bot.command('start', async (ctx) => {
     console.log('Handling /start command');

@@ -4,7 +4,7 @@ require('dotenv').config()
 const text = require ('./const')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply('Приветствую!'))
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name}`))
 bot.help((ctx) => ctx.reply('text.commands'))
 
 const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов

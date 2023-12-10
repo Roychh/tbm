@@ -4,7 +4,7 @@ require('dotenv').config()
 const text = require ('./const')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name}`))
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : незнакомец}`))
 bot.help((ctx) => ctx.reply('text.commands'))
 
 const allowedPhoneNumbers = ['+79787040822']; // Замените на реальные номера телефонов
@@ -200,7 +200,7 @@ bot.on('text', (ctx) => {
      const messageText = ctx.message.text.toLowerCase(); // Приводим текст сообщения к нижнему регистру для удобства сравнения
  
      // Проверяем, содержится ли определенное ключевое слово в тексте
-     if (messageText.includes('габелла')) {
+     if (messageText.includes('как обычно')) {
          ctx.reply('Ни прибавить, ни отнять! Держитесь...');
      } else if (messageText.includes('помогите')) {
          ctx.reply('Не нужна тебе помощь! Ты и сам отлично справляешься!');

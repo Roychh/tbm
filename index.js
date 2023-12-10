@@ -6,33 +6,30 @@ const allowedPhoneNumbers = ['+79787040822']; // Замените на реал�
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-bot.help((ctx) => ctx.reply('text.commands'))
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+});
+
+// Обработчик команды /start
 bot.command('start', async (ctx) => {
-    const userId = ctx.from.id;
-
     try {
+        const userId = ctx.from.id;
+
         // Получение информации о пользователе, включая номер телефона
         const user = await ctx.telegram.getChatMember(ctx.chat.id, userId);
-        
-        if (user && user.user && user.user.username) {
-            // Проверяем наличие username (он уникален для каждого пользователя)
-            const username = user.user.username;
 
-            if (allowedUsernames.includes(username)) {
-                // Пользователь прошел проверку, приветствуем его
-                ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
-            } else {
-                // Пользователь не прошел проверку, сообщаем ему об отсутствии доступа
-                ctx.reply('Извините, у вас нет доступа к этому боту.');
-            }
+        if (user && user.user && user.user.phone_number && allowedPhoneNumbers.includes(user.user.phone_number)) {
+            ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
         } else {
-            // Пользователь не предоставил достаточно информации, чтобы его идентифицировать
-            ctx.reply('Извините, не удалось получить информацию о вас.');
+            ctx.reply('Извините, у вас нет доступа к этому боту.');
         }
     } catch (error) {
-        console.error(error);
-        ctx.reply('Произошла ошибка при обработке вашего запроса.');
+        console.error('Error in /start command:', error);
+        ctx.reply('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
     }
 });
 

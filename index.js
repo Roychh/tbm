@@ -36,8 +36,6 @@ bot.start((ctx) => {
     }
   });
   
-
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
 bot.help((ctx) => ctx.reply(text.commands))
 
 bot.command('hot_drinks', async (ctx) => {

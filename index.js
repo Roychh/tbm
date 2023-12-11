@@ -25,7 +25,7 @@ bot.start((ctx) => {
       ctx.reply('Извините, у вас нет разрешения использовать эту команду.');
     }
   });
-  const allowedCommands = ['/showcase', '/hot_drinks', '/cold_drinks', '/work', '/keywords'];
+  const allowedCommands = ['showcase', 'hot_drinks', 'cold_drinks', 'work', 'keywords'];
 
 bot.command(allowedCommands, (ctx) => {
   const userId = ctx.message.from.id;
@@ -33,23 +33,23 @@ bot.command(allowedCommands, (ctx) => {
   if (allowedUserIds.includes(userId)) {
     // Пользователь аутентифицирован, выполняем обработку команды
     switch (ctx.command) {
-      case '/showcase':
+      case 'showcase':
         // Обработка команды /showcase
         // ...
         break;
-      case '/hot_drinks':
+      case 'hot_drinks':
         // Обработка команды /hot_drinks
         // ...
         break;
-      case '/cold_drinks':
+      case 'cold_drinks':
         // Обработка команды /cold_drinks
         // ...
         break;
-      case '/work':
+      case 'work':
         // Обработка команды /work
         // ...
         break;
-      case '/keywords':
+      case 'keywords':
         // Обработка команды /keywords
         // ...
         break;

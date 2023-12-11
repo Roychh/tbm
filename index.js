@@ -25,17 +25,7 @@ bot.start((ctx) => {
       ctx.reply('Извините, у вас нет разрешения использовать эту команду.');
     }
   });
-  
-  bot.on('text', (ctx) => {
-    const userId = ctx.message.from.id;
-  
-    if (allowedUserIds.includes(userId)) {
-      ctx.reply('Вы отправили текстовое сообщение. Вам разрешено использовать эту функцию.');
-    } else {
-      ctx.reply('Извините, у вас нет разрешения отправлять текстовые сообщения.');
-    }
-  });
-  
+   
 bot.help((ctx) => ctx.reply(text.commands))
 
 bot.command('hot_drinks', async (ctx) => {

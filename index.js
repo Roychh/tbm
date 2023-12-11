@@ -2,30 +2,11 @@ process.setMaxListeners(20);
 const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
-const allowedUserIds = ['482220254'];
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-bot.start((ctx) => {
-    const userId = ctx.from.id;
-
-    if (allowedUserIds.includes(userId.toString())) {
-        ctx.reply(`Добро пожаловать, ${ctx.from.first_name}!`);
-    } else {
-        ctx.reply('Извините, у вас нет доступа к этому боту.');
-    }
-});
-
-bot.on('text', (ctx) => {
-    const userId = ctx.from.id;
-
-    if (!allowedUserIds.includes(userId.toString())) {
-        ctx.reply('Извините, у вас нет доступа к этому боту.');
-        return;
-    }
-});
-
-bot.help((ctx) => ctx.reply('text.commands'))
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
+bot.help((ctx) => ctx.reply(text.commands))
 
 bot.command('hot_drinks', async (ctx) => {
      try {

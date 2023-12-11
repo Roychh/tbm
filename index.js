@@ -3,7 +3,18 @@ const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const allowedUserIds = [123456789, 987654321];
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+bot.start((ctx) => {
+  if (allowedUserIds.includes(ctx.message.from.id)) {
+    ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`);
+  } else {
+    ctx.reply('Извините, у вас нет разрешения использовать этого бота.');
+  }
+});
+
 
 bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
 bot.help((ctx) => ctx.reply(text.commands))

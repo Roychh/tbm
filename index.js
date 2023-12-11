@@ -3,66 +3,10 @@ const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
 
-const allowedUserIds = [482220254, 987654321];
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.start((ctx) => {
-    const userId = ctx.message.from.id;
-  
-    if (allowedUserIds.includes(userId)) {
-      ctx.reply(`Привет ${ctx.message.from.first_name || 'незнакомец'}!`);
-    } else {
-      ctx.reply('Извините, у вас нет разрешения использовать этого бота.');
-    }
-  });
-  
-  bot.help((ctx) => {
-    const userId = ctx.message.from.id;
-  
-    if (allowedUserIds.includes(userId)) {
-      ctx.reply('Это команда help. Вам разрешено использовать ее.');
-    } else {
-      ctx.reply('Извините, у вас нет разрешения использовать эту команду.');
-    }
-  });
-  const allowedCommands = ['showcase', 'hot_drinks', 'cold_drinks', 'work', 'keywords'];
 
-bot.command(allowedCommands, (ctx) => {
-  const userId = ctx.message.from.id;
-
-  if (allowedUserIds.includes(userId)) {
-    // Пользователь аутентифицирован, выполняем обработку команды
-    switch (ctx.command) {
-      case 'showcase':
-        // Обработка команды /showcase
-        // ...
-        break;
-      case 'hot_drinks':
-        // Обработка команды /hot_drinks
-        // ...
-        break;
-      case 'cold_drinks':
-        // Обработка команды /cold_drinks
-        // ...
-        break;
-      case 'work':
-        // Обработка команды /work
-        // ...
-        break;
-      case 'keywords':
-        // Обработка команды /keywords
-        // ...
-        break;
-      default:
-        ctx.reply('Неподдерживаемая команда');
-    }
-  } else {
-    // Пользователь не аутентифицирован, сообщаем ему
-    ctx.reply('Извините, у вас нет разрешения использовать эту команду.');
-  }
-});
- 
-  
+bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
 bot.help((ctx) => ctx.reply(text.commands))
 
 bot.command('hot_drinks', async (ctx) => {

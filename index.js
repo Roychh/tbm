@@ -3,7 +3,7 @@ const { Telegraf, Markup } = require('telegraf');
 require('dotenv').config()
 const text = require ('./const')
 
-const allowedUserIds = [123456789, 987654321];
+const allowedUserIds = [482220254, 987654321];
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.start((ctx) => {

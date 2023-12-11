@@ -5,7 +5,7 @@ const text = require ('./const')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-const allowed_numbers = ["+79787040822"];
+const allowed_numbers = ["+79787090872"];
 
 // Middleware для обработки команды /start
 bot.command('start', async (ctx) => {

@@ -5,7 +5,31 @@ const text = require ('./const')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
-bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
+const allowed_numbers = ["+79787040822"];
+
+// Middleware для обработки команды /start
+bot.command('start', async (ctx) => {
+  const userPhone = ctx.message.contact ? ctx.message.contact.phone_number : null;
+
+  if (userPhone && allowed_numbers.includes(userPhone)) {
+    await ctx.reply(`Добро пожаловать, ${ctx.from.first_name || 'незнакомец'}!`);
+  } else {
+    await ctx.reply("Извините, у вас нет доступа к этому боту.");
+  }
+});
+
+// Обработка команды /help
+bot.command('help', (ctx) => {
+  ctx.reply(text.commands);
+});
+
+// Обработка неизвестных команд
+bot.on('text', (ctx) => {
+  ctx.reply('Неизвестная команда. Используйте /help для получения списка команд.');
+});
+
+// Приветственное сообщение
+bot.start((ctx) => ctx.reply(`Привет ${ctx.from.first_name || 'незнакомец'}!`));
 bot.help((ctx) => ctx.reply(text.commands))
 
 bot.command('hot_drinks', async (ctx) => {

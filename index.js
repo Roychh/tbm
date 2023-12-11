@@ -6,15 +6,36 @@ const text = require ('./const')
 const allowedUserIds = [123456789, 987654321];
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-
 bot.start((ctx) => {
-  if (allowedUserIds.includes(ctx.message.from.id)) {
-    ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`);
-  } else {
-    ctx.reply('Извините, у вас нет разрешения использовать этого бота.');
-  }
-});
-
+    const userId = ctx.message.from.id;
+  
+    if (allowedUserIds.includes(userId)) {
+      ctx.reply(`Привет ${ctx.message.from.first_name || 'незнакомец'}!`);
+    } else {
+      ctx.reply('Извините, у вас нет разрешения использовать этого бота.');
+    }
+  });
+  
+  bot.help((ctx) => {
+    const userId = ctx.message.from.id;
+  
+    if (allowedUserIds.includes(userId)) {
+      ctx.reply('Это команда help. Вам разрешено использовать ее.');
+    } else {
+      ctx.reply('Извините, у вас нет разрешения использовать эту команду.');
+    }
+  });
+  
+  bot.on('text', (ctx) => {
+    const userId = ctx.message.from.id;
+  
+    if (allowedUserIds.includes(userId)) {
+      ctx.reply('Вы отправили текстовое сообщение. Вам разрешено использовать эту функцию.');
+    } else {
+      ctx.reply('Извините, у вас нет разрешения отправлять текстовые сообщения.');
+    }
+  });
+  
 
 bot.start((ctx) => ctx.reply(`Привет ${ctx.message.from.first_name ? ctx.message.from.first_name : 'незнакомец'}!`))
 bot.help((ctx) => ctx.reply(text.commands))
